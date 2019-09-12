@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Módulo | Usuarios {% endblock %}
+{% block content %}
+{% block extrahead %}
+    <script src="{% static 'core/vendor/jquery/jquery.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script src="{% static 'core/js/envia.js' %}"></script>
+{% endblock %}
+    <main role="main">
+        <div class="container col-12 mt-3">
+            <div class="col-12  mt-3 border">
+                <h3>Módulo De Usuarios </h3> 
+                <div class="row mt-4 mb-4">
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'new_users' %}" class="btn btn-primary form-control">Nuevo Usuario</a>
+                    </div>
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'list_users' 1 %}" class="btn btn-primary form-control">Listado Usuarios</a>
+                    </div>
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'check_group_main' %}" class="btn btn-primary form-control">Volver</a>               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

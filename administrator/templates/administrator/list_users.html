@@ -1,0 +1,93 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Listado de usuarios{% endblock %}
+{% block content %}
+{% block extrahead %}
+    <script src="{% static 'core/vendor/jquery/jquery.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script src="{% static 'core/js/envia.js' %}"></script>
+{% endblock %}
+    <main role="main">
+        <div class="col-12  mt-3 border table-responsive-xl">
+            <table class="table mt-2 table-hover table-sm table-bordered">      
+                <thead class="table-primary">
+                    <tr>
+                        <th colspan="6"><h3>Listado Usuarios {{group.name}}</h3></th>
+                        <th colspan="4"><a href="{% url 'main_users' %}" class="btn btn-primary form-control">Volver</a></th>
+                    </tr>
+                </thead>
+            </table>
+            <table id="service" class="table mt-2 table-hover table-sm table-bordered ">      
+                <thead class="table-primary">
+                    <tr class="text-center">
+                        <th width="200" class="align-middle">Nombre</th>
+                        <th width="200" class="align-middle">Correo</th>
+                        <th width="200" class="align-middle">Nombre Usuario</th>
+                        <th width="100" class="align-middle">Estado</th>
+                        <th width="100" class="align-middle">Funciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in users_list %}
+                        <tr class="text-center">
+                            <th>{{c.first_name}}&nbsp{{c.last_name}}</th>
+                            <th>{{c.email}}</th>
+                            <th>{{c.username}}</th>                            
+                            <th>
+                                {% if c.is_active == True %}
+                                    Activo
+                                {% else %}
+                                    Bloqueado
+                                {% endif %}
+                            </th>
+                            <th>
+                                <div class="row">
+                                    <div class="col-12 col-sm-3">                             
+                                        {% if c.is_active == True %}
+                                            <a href="{% url 'block_users' c.id group.id page %}" class="fas fa-close fa-lg nav-item" title="Bloquear Usuario"></a>                                
+                                        {% else %}
+                                            <a href="{% url 'activate_users' c.id group.id page %}" class="fas fa-check fa-lg nav-item" title="Activar Usuario"></a>                                
+                                        {% endif %}       
+                                    </div>
+                                </div>
+                            </th>                               
+                        </tr>       
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- Paginación -->
+                {% if paginator.num_pages > 1 %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if users_list.has_previous %}
+                                <li class="page-item ">
+                                    <a class="page-link" href="?page={{ users_list.previous_page_number}}">&laquo;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+                                </li>
+                            {% endif %}
+                            {% for i in paginator.page_range %}
+                                <li class="page-item {% if users_list.number == i %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+                            {% if users_list.has_next %}
+                                <li class="page-item ">
+                                    <a class="page-link" href="?page={{ users_list.next_page_number }}">&raquo;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">&raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}  
+            <!-- Paginación --> 
+        </div>
+    </main>
+{% endblock %}

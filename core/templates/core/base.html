@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Estilos -->
+    <link href="{% static 'core/system/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'core/system/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'core/system/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'core/system/vendor/pace/themes/pace-theme-bounce.css' %}" rel="stylesheet" />
+
+
+  </head>
+  <body>
+    <body>
+      <!-- Navegación -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'home' %}">Proyecto</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ned" aria-controls="ned" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="ned">
+             <ul class="navbar-nav">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'check_group_main' %}">
+                 | Principal 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">
+                 | Salir
+                </a>
+              </li>
+            </ul>
+            {% endif%}
+          </div>  
+          {% if request.user.is_authenticated %}
+          <div class="navbar-brand" id="ned">
+              Fecha {{today|date:'d-m-Y'}} 
+          </div>
+          {% else %}
+          <div class="navbar-brand" id="ned">
+            <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a>
+          </div>
+          {% endif%}
+        </div>
+      </nav>
+      <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-primary mt-3">
+                {{ message }}
+              </div>
+            {% endfor %}
+        {% endif %}         
+      <!-- End messages -->
+      <!-- Contenido -->
+      {% block content %}{% endblock %}
+      <!-- Javascript -->
+      <script src="{% static 'core/system/js/modal.js' %}"></script>
+      <script src="{% static 'core/system/vendor/pace/pace.js' %}"></script>
+      <script src="{% static 'core/system/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'core/system/js/main.js' %}"></script>
+      <script src="{% static 'core/system/js/animateprogress.js' %}"></script>
+      <script src="{% static 'core/system/js/rut.js' %}"></script>    
+      <script src="{% static 'core/system/js/reg_com.js' %}"></script>          
+    </body>
+</html>

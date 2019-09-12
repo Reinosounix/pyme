@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+    <main role="main">
+        <div class="container col-12 mt-3">
+            <div class="col-12  mt-3 border">
+                <h3>Bienvenido {{request.user.first_name}} {{request.user.last_name}} </h3> 
+                <div class="row mt-4 mb-4">
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'operation_main' %}" class="btn btn-primary form-control">Módulo Operación</a>               
+                    </div>                   
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'users_main' %}" class="btn btn-primary form-control">Módulo Usuarios</a>               
+                    </div>                   
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'client_main' %}" class="btn btn-primary form-control">Módulo Clientes</a>               
+                    </div>                   
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'debtor_main' %}" class="btn btn-primary form-control">Módulo Deudores</a>               
+                    </div>    
+                </div>
+                <div class="row mt-4 mb-4">
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'bank_main' %}" class="btn btn-primary form-control">Módulo Bancos</a>               
+                    </div>    
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'list_indicators' %}" class="btn btn-primary form-control">Módulo Indicadores</a>               
+                    </div>                   
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'document_main' %}" class="btn btn-primary form-control">Módulo Tipo Documentos</a>               
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
